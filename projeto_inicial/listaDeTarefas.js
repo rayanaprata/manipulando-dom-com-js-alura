@@ -15,6 +15,7 @@
 
     tarefa.innerHTML = conteudo;
     tarefa.appendChild(BotaoConclui());
+    tarefa.appendChild(BotaoDeleta());
 
     // anexar um elemento dentro do outro
     lista.appendChild(tarefa);
@@ -47,6 +48,23 @@
     const botaoConclui = evento.target;
     const tarefaCompleta = botaoConclui.parentElement;
     tarefaCompleta.classList.toggle("done");
+  };
+
+  // Componente começa com letra maiuscula
+  const BotaoDeleta = () => {
+    const botaoDeleta = document.createElement("button");
+
+    botaoDeleta.innerText = "deletar";
+    botaoDeleta.addEventListener("click", deletarTarefa);
+
+    return botaoDeleta;
+  };
+
+  const deletarTarefa = (evento) => {
+    const botaoDeleta = evento.target;
+    const tarefaCompleta = botaoDeleta.parentElement;
+    tarefaCompleta.remove();
+    return botaoDeleta;
   };
 })();
 
