@@ -11,6 +11,10 @@ const criarTarefa = (evento) => {
   const input = document.querySelector("[data-form-input]");
   const valor = input.value; // selecionar o valor do input, utilizando a propriedade value
 
+  const calendario = document.querySelector("[data-form-date]");
+  const data = moment(calendario.value);
+  console.log(data.format("DD/MM/YYYY"));
+
   const tarefa = document.createElement("li");
   tarefa.classList.add("task");
   const conteudo = `<p class="content">${valor}</p>`; /// criar templates utilizando template string
@@ -55,5 +59,5 @@ novaTarefa.addEventListener("click", criarTarefa); // trabalhamos com evento de 
 
 // ----------------------------
 
-// Código do curso:
+// Código final do curso JS na Web - Manipule o DOM com JavaScript:
 // https://github.com/alura-cursos/1823_DOM/tree/projeto_final
