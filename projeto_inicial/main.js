@@ -1,51 +1,12 @@
-import BotaoConclui from "./componentes/concluiTarefa.js";
-import BotaoDeleta from "./componentes/deletaTarefa.js";
-
-// Capturando o valor do input:
-const handleNovoItem = (evento) => {
-  // O comportamento padrão do formulário é encaminhar o input pro servidor
-  // Prevenindo o comportamento padrão do formulário:
-  evento.preventDefault();
-
-  const lista = document.querySelector("[data-list]"); // método querySelect para buscar um seletor, o seletor data-atributtes
-  const input = document.querySelector("[data-form-input]");
-  const valor = input.value; // selecionar o valor do input, utilizando a propriedade value
-
-  const calendario = document.querySelector("[data-form-date]");
-  const data = moment(calendario.value);
-  const dataFormatada = data.format("DD/MM/YYYY");
-
-  const dados = {
-    valor,
-    dataFormatada,
-  };
-
-  const criaTarefa = criarTarefa(dados);
-
-  // anexar um elemento dentro do outro
-  lista.appendChild(criaTarefa);
-
-  sessionStorage.setItem("tarefas", JSON.stringify(dados));
-
-  input.value = "";
-};
-
-const criarTarefa = ({ valor, dataFormatada }) => {
-  const tarefa = document.createElement("li");
-  tarefa.classList.add("task");
-  const conteudo = `<p class="content">${dataFormatada} * ${valor}</p>`; /// criar templates utilizando template string
-
-  tarefa.innerHTML = conteudo;
-  tarefa.appendChild(BotaoConclui()); // utilizar appendChild para colocar um nó logo no final de um outro nó, colocar um elemento filho dentro do elemento pai
-  tarefa.appendChild(BotaoDeleta());
-
-  return tarefa;
-};
+import { handleNovoItem } from "./componentes/criaTarefa.js";
+import { carregaTarefa } from "./componentes/carregaTarefa.js";
 
 const novaTarefa = document.querySelector("[data-form-button]");
 
 // Escutando eventos
 novaTarefa.addEventListener("click", handleNovoItem); // trabalhamos com evento de click do botão
+
+carregaTarefa();
 
 // Precisamos de três coisas para utilizar um EventListener (escutador de eventos):
 // 1. Tipo do evento;
